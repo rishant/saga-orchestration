@@ -1,0 +1,45 @@
+Start Complete Order-Orchestrator Service:
+1. Start Order-Service
+2. Start Payment-Service
+3. Start Inventory-Service
+4. Start Order-Orchestrator
+
+API testing:
+1. Open Postman
+2. Fire below command for testing create order and orderList
+
+curl --location --request POST 'http://localhost:8080/order/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "userId" : 1,
+    "productId" : 3
+}'
+
+Response:
+{
+    "id": "3a0b1c5e-00fa-4660-88cc-7dfae625082f",
+    "userId": 1,
+    "productId": 3,
+    "price": 300.0,
+    "status": "ORDER_CREATED"
+}
+
+===================================================================================================
+
+curl --location --request GET 'http://localhost:8080/order/all' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+
+    "name" : "us"
+}'
+
+Response:
+[
+    {
+        "orderId": "3a0b1c5e-00fa-4660-88cc-7dfae625082f",
+        "userId": 1,
+        "productId": 3,
+        "amount": 300.0,
+        "status": "ORDER_COMPLETED"
+    }
+]
